@@ -1,23 +1,23 @@
-package cardsType;
+package data.cardsType;
 
-import constants.NumericType;
-import constants.StringType;
+import data.constants.NumericType;
+import data.constants.StringType;
 
 import java.util.StringJoiner;
 
-public enum Hearts implements Playable {
+public enum Spades implements Playable {
     SIX(6), SEVEN(7), EIGHT(8), NINE(9), TEN(10),
     JACK(10), QUINE(10), KING(10), ACE(11);
-
     private int nominalValue;
 
-    Hearts(int nominalValue) {
+    Spades(int nominalValue) {
         this.nominalValue = nominalValue;
     }
 
     public int getNominalValue() {
         return nominalValue;
     }
+
 
     @Override
     public String toString() {

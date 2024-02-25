@@ -1,7 +1,7 @@
 package game;
 
-import cardsType.Playable;
-import constants.NumericType;
+import data.cardsType.Playable;
+import data.constants.NumericType;
 
 import java.util.Random;
 
@@ -10,14 +10,14 @@ public class Player {
     private int money;
     private Playable[] hand;
 
-
+    //При создании экземпляра игроку выдаются стартовые деньги
     public Player() {
-        this.money = 100;
+        this.money = NumericType.STARTING_MONEY.getValue();
     }
 
     public void takeNewCard(Dealer dealer) {
-        if (hand == null){
-            hand = new Playable[30];
+        if (hand == null) {
+            hand = new Playable[NumericType.MAX_NUMBER_CARD_IN_HAND.getValue()];
         }
         // Использование класса Random как альтернатива Math.random()
         int index = new Random().nextInt(NumericType.MAX_NUMBER_CARD_IN_DECK.getValue() - 1);
@@ -43,5 +43,38 @@ public class Player {
             sum += c.getNominalValue();
         }
         return sum;
+    }
+
+    public void doBet(int bet) {
+        money -= bet;
+    }
+
+    public void clearHand() {
+        hand = new Playable[NumericType.MAX_NUMBER_CARD_IN_HAND.getValue()];
+    }
+
+    public void takeWinning(int winning, int bet) {
+        switch (winning) {
+            case 0 -> {
+                System.out.println("\nНичья");
+                money += bet;
+            }
+            case 1 -> {
+                System.out.println("\nИгрок проиграл");
+            }
+            case -1 -> {
+                System.out.println("\nИгрок выиграл");
+                money += (bet * 2);
+            }
+        }
+    }
+
+    //Дальше геттеры
+    public int getMoney() {
+        return money;
+    }
+
+    public Playable[] getHand() {
+        return hand;
     }
 }

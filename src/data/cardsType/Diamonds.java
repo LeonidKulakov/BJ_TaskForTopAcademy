@@ -1,17 +1,16 @@
-package cardsType;
+package data.cardsType;
 
-import constants.NumericType;
-import constants.StringType;
+import data.constants.NumericType;
+import data.constants.StringType;
 
 import java.util.StringJoiner;
 
-public enum Clubs implements Playable {
+public enum Diamonds implements Playable {
     SIX(6), SEVEN(7), EIGHT(8), NINE(9), TEN(10),
     JACK(10), QUINE(10), KING(10), ACE(11);
-
     private int nominalValue;
 
-    Clubs(int nominalValue) {
+    Diamonds(int nominalValue) {
         this.nominalValue = nominalValue;
     }
 

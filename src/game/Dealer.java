@@ -1,7 +1,7 @@
 package game;
 
-import cardsType.*;
-import constants.NumericType;
+import data.cardsType.*;
+import data.constants.NumericType;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -16,6 +16,7 @@ public class Dealer {
 
     /**
      * Метод описывает логику действий крупье
+     *
      * @param playerScore - принимает кол-во очков набранных игроком
      * @return возвращает 0 если ничья, -1 если выиграл игрок, 1 если выиграл крупье
      */
@@ -26,6 +27,7 @@ public class Dealer {
         while (calculateScore() <= playerScore && calculateScore() < NumericType.MAX_SCORE_VALUE.getValue()) {
             takeNewCard();
         }
+        System.out.printf("Очки набранные крупье %d \n", calculateScore());
         if ((calculateScore() > NumericType.MAX_SCORE_VALUE.getValue() && playerScore > NumericType.MAX_SCORE_VALUE.getValue())
                 || (playerScore == NumericType.MAX_SCORE_VALUE.getValue()) && (calculateScore() == NumericType.MAX_SCORE_VALUE.getValue())) {
             return 0;
@@ -40,9 +42,6 @@ public class Dealer {
         // Использование класса Random как альтернатива Math.random()
         int index = new Random().nextInt(NumericType.MAX_NUMBER_CARD_IN_DECK.getValue() - 1);
         while (deck[index] == null) {
-
-            System.out.println(deck[index]);
-
             index = new Random().nextInt(NumericType.MAX_NUMBER_CARD_IN_DECK.getValue() - 1);
         }
         // Проблема использования массива в необходимости поиска места для добавления элемента
@@ -119,7 +118,11 @@ public class Dealer {
         playables.addAll(EnumSet.allOf(Diamonds.class));
         playables.addAll(EnumSet.allOf(Hearts.class));
         playables.addAll(EnumSet.allOf(Spades.class));
-        playables.stream().forEach(System.out::println);
+        playables.forEach(System.out::println);
+    }
+
+    public void clearHand() {
+        hand = new Playable[NumericType.MAX_NUMBER_CARD_IN_HAND.getValue()];
     }
 
     //!!!!!!!!!!!!!!!!Дальше гкттеры!!!!!!!!!!!!!!!!!!!!!!
